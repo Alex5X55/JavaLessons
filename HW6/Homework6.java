@@ -1,6 +1,13 @@
 package HW6;
 
+<<<<<<< HEAD
 import java.util.Scanner;
+=======
+import java.util.NoSuchElementException;
+import java.util.Scanner;
+import java.io.*;
+
+>>>>>>> 32e38dd (Lesson6 - Create Test)
 
 /**
  * Заготовка для выполнения ДЗ "Система тестирования".
@@ -18,6 +25,7 @@ public class Homework6{
                                           "Какие отличительные черты гриба подберезовика?",
                                           "Какие отличительные черты белого гриба?"};
         // TODO: Массив вариантов ответов
+<<<<<<< HEAD
         String[][] answerOptions = new String[][]{{"1 - Ораньжевая шляпка",
                                                    "2 - Черная шляпка",
                                                    "3 - Шляпка как у Дартяньна"},
@@ -27,6 +35,17 @@ public class Homework6{
                                                   {"1 - Ножка толстая и шляпка коричневая",
                                                    "2 - Ножка тонкая и кривая, шляпка красная",
                                                    "3 - похож на яйцо, желтого цвета, сморщенный"}};
+=======
+        String[][] answerOptions = new String[][]{{"Ораньжевая шляпка",
+                                                   "Черная шляпка",
+                                                   "Шляпка как у Дартаньяна"},
+                                                  {"Ножка кривая и зеленая шляпка",
+                                                   "Коричневая шляпка и ножка похожа на ствол березы",
+                                                   "Ножка ровная и шляпка как кокошник"},
+                                                  {"Ножка толстая и шляпка коричневая",
+                                                   "Ножка тонкая и кривая, шляпка красная",
+                                                   "Похож на яйцо, желтого цвета, сморщенный"}};
+>>>>>>> 32e38dd (Lesson6 - Create Test)
 
         // TODO: Массив правильных ответов
         int[] correctAnswers = new int[]{1,2,1};
@@ -44,9 +63,32 @@ public class Homework6{
             for(int j = 0; j < answerOptions.length; j++)
                 System.out.println(answerOptions[i][j]);
 
+<<<<<<< HEAD
             System.out.print("Ваш ответ: ");
             //TODO: Считываем с консоли ответ пользователя
             ansVar = scanner.nextInt();
+=======
+
+
+            try {
+                ansVar = scanner.nextInt();
+            } catch(NoSuchElementException e) {
+                System.out.println("Вы ввели не корректный символ, попробуйте еще раз пройти тест.");
+                return;
+            }
+
+            if(ansVar < 1 || ansVar> 3)
+            {
+                System.out.println("Вы вышли за границы возможных ответов, попробуйте еще раз пройти тест.");
+                return;
+            }
+
+            System.out.print("Ваш ответ: ");
+            //TODO: Считываем с консоли ответ пользователя
+
+            System.out.print(Integer.toString(ansVar)+" - "+answerOptions[i][ansVar-1]);
+
+>>>>>>> 32e38dd (Lesson6 - Create Test)
 
             //TODO: Проверяем ответ и выводим результат
             if(ansVar == correctAnswers[i])
