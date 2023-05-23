@@ -6,99 +6,107 @@ import java.io.*;
 
 public class Homework9{
 
-    public static class Answer {
-        private int _number;
-        private String _text;
-        private boolean _isRightAnswer;
+    private static Answer[][] answers =
+            {
+                    {
+                            new Answer(1, "Оранжевая шляпка", true),
+                            new Answer(2, "Черная шляпка", false),
+                            new Answer(3, "Шляпка как у Дартаньяна", false)
+                    },
+                    {
+                            new Answer(1, "Ножка кривая и зеленая шляпка", false),
+                            new Answer(2, "Коричневая шляпка и ножка похожа на ствол березы", true),
+                            new Answer(3, "Ножка ровная и шляпка как кокошник", false),
+                            new Answer(4,  "Шляпка как у гвоздя", false)
+                    },
+                    {
+                            new Answer(1, "Ножка толстая и шляпка коричневая", true),
+                            new Answer(2, "Ножка тонкая и кривая, шляпка красная", false),
+                            new Answer(3, "Похож на яйцо, желтого цвета, сморщенный", false)
+                    }
+            };
+
+
+    private static Question[] questions = {new Question(1, "Какие отличительные черты гриба подосиновика?", answers[0]),
+            new Question(2, "Какие отличительные черты гриба подберезовика?", answers[1]),
+            new Question(3, "Какие отличительные черты белого гриба?", answers[2])
+    };
+
+    static class Answer {
+        private int number;
+        private String text;
+        private boolean isRightAnswer;
 
         public Answer() {
 
         }
 
         public Answer(int number, String text, boolean isRightAnswer){
-            _number = number;
-            _text = text;
-            _isRightAnswer = isRightAnswer;
+            this.text = text;
+            this.isRightAnswer = isRightAnswer;
         }
 
-        void Print(){
-            System.out.println(_text);
+        void print(){
+            System.out.println(text);
         }
     }
 
-    public static class Question {
-        private int _number;
-        private String _text;
-        Answer[] _answers = new Answer[3];
+    static class Question {
+        private int number;
+        private String text;
+        private Answer[] answers;
 
         public Question() {
 
         }
 
-        public Question(int number, String text){
-            _number = number;
-            _text = text;
+        public Question(int number, String text, Answer[] answers ){
+            this.number = number;
+            this.text = text;
+            this.answers = answers;
         }
 
-        void Print(){
-            System.out.println(_text);
-            for (Answer a : _answers)
-                a.Print();
+        public void print(){
+            System.out.println(text);
+            for (Answer a : answers)
+                a.print();
         }
 
         boolean isRightAnswer(int anwrnumber){
-            return _answers[anwrnumber-1]._isRightAnswer;
+            return answers[anwrnumber-1].isRightAnswer;
         }
     }
 
     public static void main(String[] args) {
-        int _correctCount = 0, _wrongCount = 0, _ansVar = 0;
-
-        Question[] _questions = new Question[]{new Question(1, "Какие отличительные черты гриба подосиновика?"),
-                new Question(2, "Какие отличительные черты гриба подберезовика?"),
-                new Question(3, "Какие отличительные черты белого гриба?")
-        };
-
-        _questions[0]._answers[0] = new Answer(1, "Ораньжевая шляпка", true);
-        _questions[0]._answers[1] = new Answer(2, "Черная шляпка", false);
-        _questions[0]._answers[2] = new Answer(3, "Шляпка как у Дартаньяна", false);
-
-        _questions[1]._answers[0] = new Answer(1, "Ножка кривая и зеленая шляпка", false);
-        _questions[1]._answers[1] = new Answer(2, "Коричневая шляпка и ножка похожа на ствол березы", true);
-        _questions[1]._answers[2] = new Answer(3, "Ножка ровная и шляпка как кокошник", false);
-
-        _questions[2]._answers[0] = new Answer(1, "Ножка толстая и шляпка коричневая", true);
-        _questions[2]._answers[1] = new Answer(2, "Ножка тонкая и кривая, шляпка красная", false);
-        _questions[2]._answers[2] = new Answer(3, "Похож на яйцо, желтого цвета, сморщенный", false);
-
+        int correctCount = 0, wrongCount = 0, ansVar = 0;
 
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("ТЕСТ: НАЙДИ СВОЙ ГРИБ :)");
-        for (Question q : _questions) {
-            q.Print();
+        for (Question q : questions) {
+            q.print();
 
         try {
-                _ansVar = scanner.nextInt();
+                ansVar = scanner.nextInt();
             } catch(NoSuchElementException e) {
                 System.out.println("Вы ввели не корректный символ, попробуйте еще раз пройти тест.");
                 return;
             }
 
-        if(_ansVar < 1 || _ansVar> 3)
+        if(ansVar < 1 || ansVar > q.answers.length)
         {
             System.out.println("Вы вышли за границы возможных ответов, попробуйте еще раз пройти тест.");
             return;
         }
 
-        System.out.println("Ваш ответ: " + Integer.toString(_ansVar)+" - "+ q._answers[_ansVar-1]._text);
-        if(q.isRightAnswer(_ansVar))
-            _correctCount++;
+        System.out.println("Ваш ответ: " + Integer.toString(ansVar)+" - "+ q.answers[ansVar-1].text);
+        if(q.isRightAnswer(ansVar))
+            correctCount++;
         else
-            _wrongCount++;
+            wrongCount++;
     }
 
-    System.out.println("Результат: правильно " + _correctCount + ", неправильно " + _wrongCount);
+    System.out.println("Результат: правильно " + correctCount + ", неправильно " + wrongCount);
     }
 }
 
