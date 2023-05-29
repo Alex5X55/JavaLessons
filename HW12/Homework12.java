@@ -4,7 +4,7 @@ import java.util.*;
 import java.io.*;
 
 public class Homework12{
-    final static private int bSize = 1_000;
+    final static private int bSize = 100_000;
 
     public static void main(String[] args) {
         int[] arrInt = new int[bSize];
